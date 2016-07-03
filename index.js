@@ -1,6 +1,14 @@
-var max = 60;
+var fs = require("fs");
 var thinkgear = require("node-thinkgear-sockets")
 var jf = require('jsonfile');
+
+var dataPath = "data/";
+var max = 60;
+
+// create data folder if we do not already have one
+if (!fs.existsSync(dataPath)) {
+  fs.mkdirSync(dataPath);
+}
 
 var client = thinkgear.createClient({ enableRawOutput: false });
 
@@ -44,13 +52,13 @@ console.log(data);
     //  });
   }
   ++count;
-    var temp = [];
-    for (var i = 0; i < output.length; i++) {
-      temp[i] = output[i].slice(-max);
-    }
-    jf.writeFile('data/mindwave.json', temp, function(err) {
-      console.log('file written');
-    });
+  var temp = [];
+  for (var i = 0; i < output.length; i++) {
+    temp[i] = output[i].slice(-max);
+  }
+  jf.writeFile(dataPath + 'mindwave.json', temp, function(err) {
+    console.log('file written');
+  });
 });
 
 client.connect();
