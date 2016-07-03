@@ -1,0 +1,7 @@
+{
+  "name": "mindwave",
+  "dependencies": {
+    "jsonfile": "*",
+    "node-thinkgear-sockets": "0.0.1"
+  }
+}

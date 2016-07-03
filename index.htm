@@ -1,0 +1,40 @@
+<html lang='en'>
+<head>
+    <link href='css/metricsgraphics.css' rel='stylesheet' type='text/css'>
+    <link href='css/metricsgraphics-demo.css' rel='stylesheet' type='text/css'>
+    <link href='css/highlightjs-default.css' rel='stylesheet' type='text/css'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/highlight.pack.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.js' charset='utf-8'></script>
+    <script src='js/metricsgraphics.js'></script>
+</head>
+
+<body>
+    <div id="meditation"></div>
+    <div id="legend"></div>
+    <script>
+
+        hljs.initHighlightingOnLoad();
+
+function reload() {
+        d3.json('data/mindwave.json', function(data) {
+            MG.data_graphic({
+                title: "Meditation",
+                description: "Meditation",
+                data: data,
+                width: 1200,
+                height: 600,
+                right: 40,
+                target: '#meditation',
+                x_accessor: 'date',
+                y_accessor: 'value',
+                legend: ['low alpha', 'high alpha', 'low beta', 'high beta'],
+                legend_target: '#legend'
+            })
+            setTimeout(reload, 100);
+        });
+}
+reload();
+    </script>
+</body>
+	</html>
